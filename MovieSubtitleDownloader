@@ -8,7 +8,7 @@ public class MovieSubtitleDownloader {
 	{
 		StartPage sp= new StartPage();
 		WebDriver driver=null;
-		String searchString = sp.breakString("C:/Users/prashant.singh/Videos/The.Grand.Budapest.Hotel.2014.720p.BluRay.x264.YIFY.mp4");
+		String searchString = sp.breakString("PATH");
 		System.out.println(searchString);
 		driver=sp.intiate(driver);
 		sp.search(searchString, driver);
