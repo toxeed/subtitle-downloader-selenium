@@ -1,0 +1,53 @@
+package subtitle.movie.main;
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import java.util.List;
+
+public class StartPage {
+	
+	public WebDriver intiate(WebDriver driver)
+	{
+		driver = new FirefoxDriver();
+		driver.get("http://www.subscene.com");
+		return driver;
+		
+	}
+	
+	public String breakString(String input)
+	{
+		int len=input.length();
+		int l=input.lastIndexOf("/");		
+		return input.substring(l+1, len);
+	}
+	
+	public void search(String string,WebDriver driver)
+	{
+		WebElement searchBar=driver.findElement(By.id("q"));
+		searchBar.clear();
+		searchBar.sendKeys(string);
+		WebElement searchButton= driver.findElement(By.cssSelector("button[type=submit]"));
+		searchButton.click();
+		 List<WebElement> listElements = driver.findElements(By.xpath("//span[@class='l r neutral-icon']"))	;
+		 for( WebElement el: listElements)
+		 {
+			 if(el.getText().equalsIgnoreCase("English"))
+			 {
+				 System.out.print(el.getText());
+				 el.click();
+				 break;
+			 }
+		 }
+	}
+	
+	public void download(WebDriver driver)
+	{
+		WebElement downloadButton= driver.findElement(By.id("downloadButton"));
+		downloadButton.click();
+	}
+
+}
