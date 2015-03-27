@@ -1,0 +1,18 @@
+package subtitle.movie.main;
+
+import org.openqa.selenium.WebDriver;
+
+public class MovieSubtitleDownloader {
+
+	public static void main(String[] args)
+	{
+		StartPage sp= new StartPage();
+		WebDriver driver=null;
+		String searchString = sp.breakString("C:/Users/prashant.singh/Videos/The.Grand.Budapest.Hotel.2014.720p.BluRay.x264.YIFY.mp4");
+		System.out.println(searchString);
+		driver=sp.intiate(driver);
+		sp.search(searchString, driver);
+		sp.download(driver);
+	}
+
+}
