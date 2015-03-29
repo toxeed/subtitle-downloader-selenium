@@ -6,14 +6,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+
 import java.util.List;
 
 public class StartPage {
 	
-	public WebDriver intiate(WebDriver driver)
+	public WebDriver intiate(WebDriver driver, String string)
 	{
-		driver = new FirefoxDriver();
-		driver.get("http://www.subscene.com");
+		FirefoxProfile profile = new FirefoxProfile();  
+		profile.setPreference("browser.download.folderList", 2); 
+		profile.setPreference("browser.helperApps.alwaysAsk.force", false); 
+		profile.setPreference("browser.download.manager.showWhenStarting",false); 
+		profile.setPreference("browser.helperApps.neverAsk.saveToDisk","application/zip, application/x-zip, application/x-zip-compressed, application/download, application/octet-stream"); 
+		profile.setPreference("browser.download.dir", string);
+		driver = new FirefoxDriver(profile);
 		return driver;
 		
 	}
@@ -27,6 +34,7 @@ public class StartPage {
 	
 	public void search(String string,WebDriver driver)
 	{
+		driver.get("http://www.subscene.com");
 		WebElement searchBar=driver.findElement(By.id("q"));
 		searchBar.clear();
 		searchBar.sendKeys(string);
@@ -37,7 +45,7 @@ public class StartPage {
 		 {
 			 if(el.getText().equalsIgnoreCase("English"))
 			 {
-				 System.out.print(el.getText());
+				 System.out.print("Language Of The Subtitle: "+el.getText());
 				 el.click();
 				 break;
 			 }
@@ -48,6 +56,12 @@ public class StartPage {
 	{
 		WebElement downloadButton= driver.findElement(By.id("downloadButton"));
 		downloadButton.click();
+	}
+	
+	public String saveToDirectory( String string){
+		int l=string.lastIndexOf("/");
+		string=string.substring(0, l-1);
+		return string;
 	}
 
 }
