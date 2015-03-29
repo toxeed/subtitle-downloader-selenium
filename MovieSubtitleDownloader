@@ -8,9 +8,12 @@ public class MovieSubtitleDownloader {
 	{
 		StartPage sp= new StartPage();
 		WebDriver driver=null;
-		String searchString = sp.breakString("PATH");
-		System.out.println(searchString);
-		driver=sp.intiate(driver);
+		String searchString = "C:/Users/prashant.singh/Videos/The.Theory.of.Everything.2014.DVDScr.XVID.AC3.SHQ.Hive-CM8";
+		String saveLocation= sp.saveToDirectory(searchString);
+		System.out.println("Location Where Subtitle Is To Downloaded: "+saveLocation);
+		driver=sp.intiate(driver,saveLocation);
+		searchString=sp.breakString(searchString);
+		System.out.println("Movie To Be Searched: "+searchString);
 		sp.search(searchString, driver);
 		sp.download(driver);
 	}
